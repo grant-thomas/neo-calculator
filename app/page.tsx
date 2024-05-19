@@ -1,7 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import '../styles/global.css';
 import styles from '../styles/styles.module.css';
 
 import {
