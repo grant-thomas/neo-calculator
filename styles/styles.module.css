@@ -246,10 +246,6 @@
 		max-width: 320px;
 	}
 
-	.input select {
-		padding-left: 4px;
-	}
-
 	.outputContainer {
 		background: linear-gradient(
 			90deg,
