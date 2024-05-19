@@ -16,6 +16,7 @@
 		rgba(47, 50, 86, 1) 100%
 	);
 	box-shadow: 1px 1px 12px black;
+	color: white;
 }
 
 .button:hover {
@@ -75,6 +76,7 @@
 		rgba(47, 50, 86, 1) 100%
 	);
 	box-shadow: 1px 1px 12px black;
+	color: white;
 }
 
 .input select {
@@ -88,11 +90,13 @@
 		rgba(47, 50, 86, 1) 100%
 	);
 	box-shadow: 1px 1px 12px black;
+	color: white;
 }
 
 .input label:first-of-type {
 	width: 160px;
 	text-shadow: 1px 1px 12px black;
+	color: white;
 }
 
 .input input:hover,
@@ -175,6 +179,7 @@
 	);
 	box-shadow: 1px 1px 12px black;
 	padding-left: 8px;
+	color: white;
 }
 
 .output label:first-of-type {
@@ -208,6 +213,7 @@
 	margin: 0px 3px 0px 3px;
 	width: 30px;
 	height: 22px;
+	color: white;
 }
 
 .units2 {
@@ -224,6 +230,7 @@
 	margin: 0px 3px 0px 3px;
 	width: 30px;
 	height: 22px;
+	color: white;
 }
 
 @media (max-width: 770px) {
