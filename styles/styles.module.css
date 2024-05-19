@@ -1,0 +1,247 @@
+.buttonDiv {
+	display: flex;
+	margin-left: -40px;
+}
+
+.button {
+	width: 100px;
+	height: 35px;
+	margin: 10px 10px 0px 10px;
+	letter-spacing: 1px;
+	border: 1px solid black;
+	border-radius: 8px;
+	background: linear-gradient(
+		330deg,
+		rgba(19, 8, 28, 1) 65%,
+		rgba(47, 50, 86, 1) 100%
+	);
+	box-shadow: 1px 1px 12px black;
+}
+
+.button:hover {
+	background: rgb(47, 48, 67) 100%;
+	border: 1px solid rgba(255, 255, 255, 0.3);
+	transform: scale(1.02);
+	transition: transform 0.1s;
+}
+
+.button:active {
+	left: 40px;
+	top: 40px;
+	border: none;
+	background-color: black;
+	box-shadow: rgb(255, 255, 255) 0px 0px 0px 0px;
+	transform: scale(0.98);
+}
+
+.grid {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(50%, auto));
+	max-width: 100%;
+	width: 800px;
+	gap: 5px;
+}
+
+.inputContainer {
+	background: linear-gradient(
+		90deg,
+		rgba(23, 25, 44, 1) 0%,
+		rgba(58, 101, 147, 1) 110%
+	);
+	border: 1px solid black;
+	border-radius: 10px;
+	height: 300px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	box-shadow: 1px 1px 12px black;
+}
+
+.input {
+	display: flex;
+	align-items: center;
+	margin: 3px 0px 3px 3px;
+}
+
+.input input {
+	font-size: 1rem;
+	width: 90px;
+	padding-left: 5px;
+	border-radius: 5px;
+	background: linear-gradient(
+		330deg,
+		rgba(19, 8, 28, 1) 87%,
+		rgba(47, 50, 86, 1) 100%
+	);
+	box-shadow: 1px 1px 12px black;
+}
+
+.input select {
+	font-size: 1rem;
+	width: 90px;
+	padding-left: 1px;
+	border-radius: 5px;
+	background: linear-gradient(
+		330deg,
+		rgba(19, 8, 28, 1) 87%,
+		rgba(47, 50, 86, 1) 100%
+	);
+	box-shadow: 1px 1px 12px black;
+}
+
+.input label:first-of-type {
+	width: 160px;
+	text-shadow: 1px 1px 12px black;
+}
+
+.input input:hover,
+.input select:hover {
+	background: rgb(47, 48, 67) 100%;
+}
+
+.main {
+	background-color: lightgrey;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+	padding: 6rem;
+	min-height: 100vh;
+	font-size: 1rem;
+}
+
+.errorMessage {
+	border: 1px solid lightgray;
+	border-radius: 5px;
+	background-color: rgb(189, 56, 56);
+	box-shadow: 1px 1px 12px black;
+	font-size: 0.8rem;
+	padding: 6px;
+	margin: 5px 0px 5px -40px;
+	color: white;
+}
+
+.errorMessage2 {
+	border: 1px solid lightgray;
+	border-radius: 5px;
+	background-color: rgb(189, 56, 56);
+	box-shadow: 1px 1px 12px black;
+	font-size: 0.8rem;
+	padding: 6px;
+	margin: 5px 0px -2px -40px;
+	color: white;
+}
+
+.errorMessageInput {
+	border: 1px solid lightgray;
+	border-radius: 5px;
+	background-color: rgb(189, 56, 56);
+	box-shadow: 1px 1px 12px black;
+	font-size: 0.8rem;
+	padding: 6px;
+	margin: 3px 0px 3px 0px;
+	color: white;
+}
+
+.outputContainer {
+	background: linear-gradient(
+		-90deg,
+		rgba(23, 25, 44, 1) 0%,
+		rgba(58, 101, 147, 1) 120%
+	);
+	border: 1px solid black;
+	border-radius: 10px;
+	height: 300px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	overflow: hidden;
+	justify-content: center;
+	padding-left: 40px;
+	box-shadow: 1px 1px 12px black;
+}
+
+.output {
+	display: flex;
+	align-items: center;
+	margin: 3px 40px 3px 0px;
+	border: 1.5px solid rgba(128, 128, 128, 0.898);
+	border-radius: 5px;
+	background: linear-gradient(
+		330deg,
+		rgba(19, 8, 28, 1) 87%,
+		rgba(47, 50, 86, 1) 100%
+	);
+	box-shadow: 1px 1px 12px black;
+	padding-left: 8px;
+}
+
+.output label:first-of-type {
+	width: 160px;
+	text-shadow: 1px 1px 12px black;
+}
+
+.output label:last-of-type {
+	width: 108px;
+	text-shadow: 1px 1px 12px black;
+	border-left: 1px solid rgba(128, 128, 128, 0.898);
+	padding-left: 6px;
+}
+
+.special select {
+	width: 124px;
+	margin-left: -4px;
+}
+
+.units {
+	font-size: 0.9rem;
+	border: 1.5px solid rgba(128, 128, 128, 0.898);
+	border-radius: 5px;
+	background: linear-gradient(
+		330deg,
+		rgba(19, 8, 28, 1) 87%,
+		rgba(47, 50, 86, 1) 100%
+	);
+	box-shadow: 1px 1px 12px black;
+	padding: 1px 5px 0px 5px;
+	margin: 0px 3px 0px 3px;
+	width: 30px;
+	height: 22px;
+}
+
+.units2 {
+	font-size: 0.7rem;
+	border: 1.5px solid rgba(128, 128, 128, 0.898);
+	border-radius: 5px;
+	background: linear-gradient(
+		330deg,
+		rgba(19, 8, 28, 1) 87%,
+		rgba(47, 50, 86, 1) 100%
+	);
+	box-shadow: 1px 1px 12px black;
+	padding: 3px 0px 0px 3px;
+	margin: 0px 3px 0px 3px;
+	width: 30px;
+	height: 22px;
+}
+
+@media (max-width: 770px) {
+	.content {
+		padding: 4rem;
+	}
+
+	.grid {
+		grid-template-columns: 1fr;
+		margin-bottom: 120px;
+		max-width: 320px;
+	}
+
+	.outputContainer {
+		background: linear-gradient(
+			90deg,
+			rgba(23, 25, 44, 1) 0%,
+			rgba(58, 101, 147, 1) 130%
+		);
+	}
+}
