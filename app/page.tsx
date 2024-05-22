@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styles from '../styles/styles.module.css';
 
 import {
@@ -38,9 +38,26 @@ export default function Home() {
 	];
 
 	const [inputData, setInputData] = useState<Input[]>(initialInputData);
+	const [error, setError] = useState('');
 
 	const resetState = () => {
 		setInputData(initialInputData);
+	};
+
+	const renderTableErrorSection = () => {
+		if (error)
+			return `
+				<thead>
+					<tr>
+							<th colspan="2" style='background: rgb(189, 56, 56, 0.6);'>Error</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td colspan="2">${error}</td>
+					</tr>
+				</tbody>`;
+		return '';
 	};
 
 	const handlePrint = () => {
@@ -49,7 +66,7 @@ export default function Home() {
 			const htmlContent = `
             <html>
             <head>
-                <title>NEO Products Plug Length Calculations</title>
+                <title>NeoProducts Plug Length Calculations</title>
                 <style>
                     @page { size: portrait; }
                     @media print {
@@ -62,9 +79,9 @@ export default function Home() {
                 </style>
             </head>
             <body>
-                <table border="1">
+                <table border="1" id="main-table">
                     <caption style="white-space: nowrap; padding: 10px;">
-                        NEO Products Plug Length Calculations
+												<span style="color: red;">Neo</span>Products Plug Length Calculations
                     </caption>
                     <thead>
                         <tr>
@@ -112,33 +129,21 @@ export default function Home() {
                     </thead>
                     <tbody>
                         <tr>
-                            <td>Fdev</td>
-                            <td>${
-															calculateFdev() === -1
-																? 'Well deviation is too high!'
-																: calculateFdev()
-														}</td>
-                        </tr>
-                        <tr>
                             <td>~I.D.</td>
                             <td>${
-															calculateID() >= 0
+															calculateID() > 0 &&
+															error !== 'Well Deviation is too high!' &&
+															error !==
+																'Red Lid required for temperatures > 350°F'
 																? `${calculateID().toFixed(3)} in`
-																: '-'
-														}</td>
-                        </tr>
-                        <tr>
-                            <td>Sheer Stress</td>
-                            <td>${
-															calculateShearStress() >= 0
-																? `${calculateShearStress()} psi`
 																: '-'
 														}</td>
                         </tr>
                         <tr>
                             <td>Volume of Cement</td>
                             <td>${
-															calculateVolume() >= 0
+															calculateVolume() > 0 &&
+															error !== 'Well Deviation is too high!'
 																? `${calculateVolume().toFixed(1)} gal`
 																: '-'
 														}</td>
@@ -146,7 +151,8 @@ export default function Home() {
                         <tr>
                             <td>Cement Kits</td>
                             <td>${
-															calculateKitsNeeded() >= 0
+															calculateKitsNeeded() > 0 &&
+															error !== 'Well Deviation is too high!'
 																? `${calculateKitsNeeded()} kits`
 																: '-'
 														}</td>
@@ -154,7 +160,8 @@ export default function Home() {
                         <tr>
                             <td>Number of Runs</td>
                             <td>${
-															calculateRunsNeeded() >= 0
+															calculateRunsNeeded() > 0 &&
+															error !== 'Well Deviation is too high!'
 																? `${calculateRunsNeeded()} runs`
 																: '-'
 														}</td>
@@ -162,12 +169,14 @@ export default function Home() {
                         <tr>
                             <td>Cement Plug Length</td>
                             <td>${
-															calculatePlugLength() >= 0
+															calculatePlugLength() > 0 &&
+															error !== 'Well Deviation is too high!'
 																? `${calculatePlugLength().toFixed(2)} ft`
 																: '-'
 														}</td>
                         </tr>
                     </tbody>
+										${renderTableErrorSection()}
                 </table>
                 <br>
                 <br>
@@ -278,9 +287,29 @@ export default function Home() {
 		return numRuns;
 	};
 
+	useEffect(() => {
+		if (calculateFdev() === -1) {
+			setError('Well Deviation is too high!');
+			return;
+		}
+		if (
+			parseInt(inputData[0].temperatureRange.split('-')[0]) > 350 &&
+			inputData[0].productType !== 'Red Lid'
+		) {
+			setError('Red Lid required for temperatures > 350°F');
+			return;
+		}
+		if (calculatePlugLength() > 0 && calculatePlugLength() < 10) {
+			setError('Always dump a minimum of 10 ft!');
+			return;
+		}
+		setError('');
+	}, [inputData[0]]);
+
 	return (
 		<main className={styles.main}>
 			<div className={styles.grid}>
+				{/* INPUTS */}
 				<div className={styles.inputContainer}>
 					<div className={styles.input}>
 						<label>Differential Pressure</label>
@@ -317,7 +346,8 @@ export default function Home() {
 							value={inputData[0].csgWeight}
 							min={1}
 							max={150}
-							onChange={(e) => handleInputChange(e, 0, 'csgWeight', 150, 6)}
+							step={0.25}
+							onChange={(e) => handleInputChange(e, 0, 'csgWeight', 150, 5)}
 							onFocus={(e) => e.target.select()}
 						/>
 						<label className={styles.units2}>lb/ft</label>
@@ -339,14 +369,14 @@ export default function Home() {
 						<label>Bailer Length</label>
 						<select
 							value={inputData[0].bailerLength}
-							onChange={(e) => handleInputChange(e, 0, 'bailerLength', 40, 2)}>
+							onChange={(e) => handleInputChange(e, 0, 'bailerLength', 60, 2)}>
 							{bailerLengths.map((length) => (
 								<option key={length} value={length}>
 									{length}
 								</option>
 							))}
 						</select>
-						<label className={styles.units}>in</label>
+						<label className={styles.units}>ft</label>
 					</div>
 					<div className={styles.input}>
 						<label>Bailer Size</label>
@@ -378,7 +408,7 @@ export default function Home() {
 					</div>
 
 					<div className={styles.input}>
-						<label>Product Type</label>
+						<label>Cement Type</label>
 						<div className={styles.special}>
 							<select
 								value={inputData[0].productType}
@@ -393,33 +423,15 @@ export default function Home() {
 					</div>
 				</div>
 
+				{/* OUTPUTS */}
 				<div className={styles.outputContainer}>
-					<div className={styles.output}>
-						<label>Fdev</label>
-						<label>
-							{calculateFdev() !== -1 ? calculateFdev() : <div>-</div>}
-						</label>
-					</div>
-					{calculateFdev() === -1 && (
-						<div className={styles.errorMessage}>
-							Well deviation is too high!
-						</div>
-					)}
 					<div className={styles.output}>
 						<label>~I.D.</label>
 						<label>
-							{calculateID() > 0 ? (
+							{calculateID() > 0 &&
+							error !== 'Well Deviation is too high!' &&
+							error !== 'Red Lid required for temperatures > 350°F' ? (
 								calculateID().toFixed(3) + ' in'
-							) : (
-								<div>-</div>
-							)}
-						</label>
-					</div>
-					<div className={styles.output}>
-						<label>Shear Stress</label>
-						<label>
-							{calculateShearStress() > 0 ? (
-								calculateShearStress() + ' psi'
 							) : (
 								<div>-</div>
 							)}
@@ -429,7 +441,8 @@ export default function Home() {
 					<div className={styles.output}>
 						<label>Volume of Cement</label>
 						<label>
-							{calculateVolume() > 0 ? (
+							{calculateVolume() > 0 &&
+							error !== 'Well Deviation is too high!' ? (
 								calculateVolume().toFixed(1) + ' gal'
 							) : (
 								<div>-</div>
@@ -439,7 +452,8 @@ export default function Home() {
 					<div className={styles.output}>
 						<label>Cement Kits</label>
 						<label>
-							{calculateKitsNeeded() > 0 ? (
+							{calculateKitsNeeded() > 0 &&
+							error !== 'Well Deviation is too high!' ? (
 								calculateKitsNeeded() + ' kits'
 							) : (
 								<div>-</div>
@@ -449,7 +463,8 @@ export default function Home() {
 					<div className={styles.output}>
 						<label>Number of Runs</label>
 						<label>
-							{calculateRunsNeeded() > 0 ? (
+							{calculateRunsNeeded() > 0 &&
+							error !== 'Well Deviation is too high!' ? (
 								calculateRunsNeeded() + ' runs'
 							) : (
 								<div>-</div>
@@ -461,24 +476,23 @@ export default function Home() {
 						<label
 							style={{
 								color:
-									calculatePlugLength() <= 0
+									calculatePlugLength() <= 0 || error
 										? 'white'
 										: calculatePlugLength() < 10
 										? 'red'
 										: 'rgb(107, 217, 107)',
 							}}>
-							{calculatePlugLength() > 0 ? (
+							{calculatePlugLength() > 0 &&
+							error !== 'Well Deviation is too high!' ? (
 								calculatePlugLength().toFixed(2) + ' ft'
 							) : (
 								<div>-</div>
 							)}
 						</label>
 					</div>
-					{calculatePlugLength() > 0 && calculatePlugLength() < 10 && (
-						<div className={styles.errorMessage2}>
-							Always dump a minimum of 10 ft!
-						</div>
-					)}
+
+					{error && <div className={styles.errorMessage}>{error}</div>}
+
 					<div className={styles.buttonDiv}>
 						<button className={styles.button} onClick={resetState}>
 							Reset

@@ -180,7 +180,9 @@
 		rgba(47, 50, 86, 1) 100%
 	);
 	box-shadow: 1px 1px 12px black;
-	padding-left: 8px;
+	padding: 3px 0px 3px 8px;
+	margin-top: 4px;
+	margin-bottom: 4px;
 	color: white;
 }
 

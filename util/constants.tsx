@@ -17,7 +17,7 @@ export const bailerSizes = [
 	1.375, 1.625, 1.75, 2, 2.125, 2.5, 2.625, 3, 3.5, 4, 5,
 ];
 
-export const bailerLengths = [10, 15, 20, 25, 30, 35, 40];
+export const bailerLengths = [10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60];
 
 export const productTypes = [
 	'G1-G3',
