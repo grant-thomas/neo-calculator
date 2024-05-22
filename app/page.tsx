@@ -300,7 +300,8 @@ export default function Home() {
 			return;
 		}
 		if (calculatePlugLength() > 0 && calculatePlugLength() < 10) {
-			setError('Always dump a minimum of 10 ft!');
+			setError(`Always dump a min of 10 ft!
+			Increase DP.`);
 			return;
 		}
 		setError('');
