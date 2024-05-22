@@ -382,6 +382,7 @@ export default function Home() {
 					<div className={styles.input}>
 						<label>Bailer Size</label>
 						<select
+							className={styles.select}
 							value={inputData[0].bailerSize}
 							onChange={(e) => handleInputChange(e, 0, 'bailerSize', 5, 5)}>
 							{bailerSizes.map((size) => (
@@ -395,6 +396,7 @@ export default function Home() {
 					<div className={styles.input}>
 						<label>Temperature Range</label>
 						<select
+							className={styles.select}
 							value={inputData[0].temperatureRange}
 							onChange={(e) =>
 								handleInputChange(e, 0, 'temperatureRange', 9999, 9999)
@@ -412,6 +414,7 @@ export default function Home() {
 						<label>Cement Type</label>
 						<div className={styles.special}>
 							<select
+								className={styles.select}
 								value={inputData[0].productType}
 								onChange={(e) => handleInputChange(e, 0, 'productType', 0, 0)}>
 								{productTypes.map((product) => (

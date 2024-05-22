@@ -123,11 +123,16 @@
 	color: black;
 }
 
-/* .select option {
-	-webkit-appearance: none;
-	-moz-appearance: none;
+.select {
 	appearance: none;
-} */
+	-webkit-appearance: none; /* For Safari */
+	-moz-appearance: none; /* For Firefox */
+}
+
+.select option {
+	background-color: white;
+	color: black;
+}
 
 .errorMessage {
 	border: 1px solid lightgray;
