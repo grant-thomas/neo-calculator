@@ -368,6 +368,7 @@ export default function Home() {
 					<div className={styles.input}>
 						<label>Bailer Length</label>
 						<select
+							className={styles.select}
 							value={inputData[0].bailerLength}
 							onChange={(e) => handleInputChange(e, 0, 'bailerLength', 60, 2)}>
 							{bailerLengths.map((length) => (

@@ -95,6 +95,11 @@
 	color: white;
 }
 
+.input option {
+	background-color: red;
+	color: white;
+}
+
 .input label:first-of-type {
 	width: 160px;
 	text-shadow: 1px 1px 12px black;
@@ -107,7 +112,7 @@
 }
 
 .main {
-	background-color: lightgrey;
+	/* background-color: lightgrey; */
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
@@ -115,7 +120,14 @@
 	padding: 6rem;
 	min-height: 100vh;
 	font-size: 1rem;
+	color: black;
 }
+
+/* .select option {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+} */
 
 .errorMessage {
 	border: 1px solid lightgray;
