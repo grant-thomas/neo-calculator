@@ -130,8 +130,8 @@
 }
 
 .select option {
-	background-color: white;
-	color: black;
+	background: rgb(47, 48, 67) 100%;
+	color: white;
 }
 
 .errorMessage {
