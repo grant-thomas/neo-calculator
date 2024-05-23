@@ -419,7 +419,7 @@ export default function Home() {
 						<label className={styles.units}>°F</label>
 					</div>
 
-					<div className={styles.input}>
+					<div className={styles.input} style={{ width: '285px' }}>
 						<label>Cement Type</label>
 						<div className={styles.special}>
 							<select
