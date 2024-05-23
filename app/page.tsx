@@ -107,7 +107,7 @@ export default function Home() {
                         </tr>
                         <tr>
                             <td>Bailer Length</td>
-                            <td>${inputData[0].bailerLength} in</td>
+                            <td>${inputData[0].bailerLength} ft</td>
                         </tr>
                         <tr>
                             <td>Bailer Size</td>
@@ -118,7 +118,7 @@ export default function Home() {
                             <td>${inputData[0].temperatureRange} °F</td>
                         </tr>
                         <tr>
-                            <td>Product Type</td>
+                            <td>Cement Type</td>
                             <td>${inputData[0].productType}</td>
                         </tr>
                     </tbody>
@@ -134,7 +134,8 @@ export default function Home() {
 															calculateID() > 0 &&
 															error !== 'Well Deviation is too high!' &&
 															error !==
-																'Red Lid required for temperatures > 350°F'
+																'Red Lid required for temperatures > 350°F' &&
+															error !== 'Max temperature for Black Lid is 325°F'
 																? `${calculateID().toFixed(3)} in`
 																: '-'
 														}</td>
@@ -299,6 +300,13 @@ export default function Home() {
 			setError('Red Lid required for temperatures > 350°F');
 			return;
 		}
+		if (
+			parseInt(inputData[0].temperatureRange.split('-')[0]) === 326 &&
+			inputData[0].productType === 'Black Lid'
+		) {
+			setError('Max temperature for Black Lid is 325°F');
+			return;
+		}
 		if (calculatePlugLength() > 0 && calculatePlugLength() < 10) {
 			setError(`Always dump a min of 10 ft!
 			Increase DP.`);
@@ -435,7 +443,8 @@ export default function Home() {
 						<label>
 							{calculateID() > 0 &&
 							error !== 'Well Deviation is too high!' &&
-							error !== 'Red Lid required for temperatures > 350°F' ? (
+							error !== 'Red Lid required for temperatures > 350°F' &&
+							error !== 'Max temperature for Black Lid is 325°F' ? (
 								calculateID().toFixed(3) + ' in'
 							) : (
 								<div>-</div>
