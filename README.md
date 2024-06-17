@@ -1,36 +1,30 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Neo Calculator
+## _Global Oil Field Drilling Tool_
 
-## Getting Started
+Neo Calculator is used to determine __cement plug length__ needed for long-term pressure isolation.
 
-First, run the development server:
+## Live Demo
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+You can view a live demo of the calculator deployed on Vercel by clicking the link in the About section below:
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+[Neo Calculator - Live Demo](https://www.neo-plug-calculator.vercel.app/)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Features
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- Input paramters determine output
+- Input validation
+- Error messages
+- Reset Button
+- Export data in table format as PDF
 
-## Learn More
+Neo Calculator is a full redesign of a previously used excel spreadsheet that was used to determine the same data, but it is now presented in an intuitive, easy-to-use user interface.
 
-To learn more about Next.js, take a look at the following resources:
+## Tech
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Neo Calculator uses the NextJS framework:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+![NextJS Logo](https://i.pinimg.com/736x/1f/24/1d/1f241dd5db6f680253d76f371add690a.jpg)
 
-## Deploy on Vercel
+## Acknowledgements
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Neo Calculator was developed for a client. This repository contains a sanitized version of the codebase to showcase the technical work done while respecting client confidentiality.
