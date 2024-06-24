@@ -216,6 +216,11 @@ export default function Home() {
       value = parts[0] + "." + parts.slice(1).join("");
     }
 
+    // Limit to two decimal places
+    if (parts.length === 2 && parts[1].length > 2) {
+      value = parts[0] + "." + parts[1].slice(0, 2);
+    }
+
     const inputLength = e.currentTarget.value.length;
 
     const allowedKeys = ["Backspace", "Delete", "ArrowLeft", "ArrowRight"];
@@ -368,7 +373,7 @@ export default function Home() {
               min={1}
               max={150}
               step={0.25}
-              onChange={(e) => handleInputChange(e, 0, "csgWeight", 150, 5)}
+              onChange={(e) => handleInputChange(e, 0, "csgWeight", 150, 6)}
               onFocus={(e) => e.target.select()}
             />
             <label className={styles.units2}>lb/ft</label>
