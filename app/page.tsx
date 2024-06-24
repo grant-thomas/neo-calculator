@@ -205,7 +205,17 @@ export default function Home() {
     maxValue: number,
     maxChars: number
   ) => {
-    const value = e.currentTarget.value;
+    let value = e.currentTarget.value;
+
+    // Remove any characters that are not digits or a single decimal point
+    value = value.replace(/[^0-9.]/g, "");
+
+    // Ensure only one decimal point is allowed
+    const parts = value.split(".");
+    if (parts.length > 2) {
+      value = parts[0] + "." + parts.slice(1).join("");
+    }
+
     const inputLength = e.currentTarget.value.length;
 
     const allowedKeys = ["Backspace", "Delete", "ArrowLeft", "ArrowRight"];
@@ -323,7 +333,7 @@ export default function Home() {
           <div className={styles.input}>
             <label>Differential Pressure</label>
             <input
-              type="number"
+              type="text"
               pattern="[0-9]*"
               value={inputData[0].dp}
               min={1}
@@ -336,13 +346,14 @@ export default function Home() {
           <div className={styles.input}>
             <label>CSG Size</label>
             <input
-              type="decimal"
-              pattern="[0-9]*"
+              type="text"
+              inputMode="decimal"
+              pattern="[0-9]*\.?[0-9]*"
               value={inputData[0].csgSize}
               min={1}
               max={20}
               step={0.125}
-              onChange={(e) => handleInputChange(e, 0, "csgSize", 20, 6)}
+              onChange={(e) => handleInputChange(e, 0, "csgSize", 20, 5)}
               onFocus={(e) => e.target.select()}
             />
             <label className={styles.units}>in</label>
@@ -350,8 +361,9 @@ export default function Home() {
           <div className={styles.input}>
             <label>CSG Weight</label>
             <input
-              type="decimal"
-              pattern="[0-9]*"
+              type="text"
+              inputMode="decimal"
+              pattern="[0-9]*\.?[0-9]*"
               value={inputData[0].csgWeight}
               min={1}
               max={150}
@@ -364,12 +376,13 @@ export default function Home() {
           <div className={styles.input}>
             <label>Well Deviation</label>
             <input
-              type="decimal"
-              pattern="[0-9]*"
+              type="text"
+              inputMode="decimal"
+              pattern="[0-9]*\.?[0-9]*"
               value={inputData[0].wellDeviation}
               min={0}
               max={90}
-              onChange={(e) => handleInputChange(e, 0, "wellDeviation", 99, 2)}
+              onChange={(e) => handleInputChange(e, 0, "wellDeviation", 99, 5)}
               onFocus={(e) => e.target.select()}
             />
             <label className={styles.units}>°</label>
