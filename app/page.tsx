@@ -207,48 +207,50 @@ export default function Home() {
   ) => {
     let value = e.currentTarget.value;
 
-    if (field === "dp") {
-      // Remove any non-digit characters for Differential Pressure
-      value = value.replace(/[^0-9]/g, "");
-    } else {
-      // Remove any characters that are not digits or a single decimal point for other inputs
-      value = value.replace(/[^0-9.]/g, "");
+    if (e.currentTarget.tagName === "INPUT") {
+      if (field === "dp") {
+        // Remove any non-digit characters for Differential Pressure
+        value = value.replace(/[^0-9]/g, "");
+      } else {
+        // Remove any characters that are not digits or a single decimal point for other inputs
+        value = value.replace(/[^0-9.]/g, "");
 
-      // Ensure only one decimal point is allowed
-      const parts = value.split(".");
-      if (parts.length > 2) {
-        value = parts[0] + "." + parts.slice(1).join("");
-      }
-
-      // Limit to two decimal places
-      if (parts.length === 2 && parts[1].length > 2) {
-        value = parts[0] + "." + parts[1].slice(0, 2);
-      }
-    }
-
-    const inputLength = e.currentTarget.value.length;
-
-    const allowedKeys = ["Backspace", "Delete", "ArrowLeft", "ArrowRight"];
-
-    if (
-      parseInt(value) > maxValue ||
-      (inputLength > maxChars &&
-        !allowedKeys.includes(value) &&
-        (field == "dp" ||
-          field == "csgSize" ||
-          field == "csgWeight" ||
-          field == "wellDeviation"))
-    ) {
-      e.preventDefault();
-    } else {
-      const updatedData = inputData.map((row, i) => {
-        if (i === index) {
-          return { ...row, [field]: value };
+        // Ensure only one decimal point is allowed
+        const parts = value.split(".");
+        if (parts.length > 2) {
+          value = parts[0] + "." + parts.slice(1).join("");
         }
-        return row;
-      });
-      setInputData(updatedData);
+
+        // Limit to two decimal places
+        if (parts.length === 2 && parts[1].length > 2) {
+          value = parts[0] + "." + parts[1].slice(0, 2);
+        }
+      }
+
+      const inputLength = e.currentTarget.value.length;
+      const allowedKeys = ["Backspace", "Delete", "ArrowLeft", "ArrowRight"];
+
+      if (
+        parseInt(value) > maxValue ||
+        (inputLength > maxChars &&
+          !allowedKeys.includes(value) &&
+          (field === "dp" ||
+            field === "csgSize" ||
+            field === "csgWeight" ||
+            field === "wellDeviation"))
+      ) {
+        e.preventDefault();
+        return;
+      }
     }
+
+    const updatedData = inputData.map((row, i) => {
+      if (i === index) {
+        return { ...row, [field]: value };
+      }
+      return row;
+    });
+    setInputData(updatedData);
   };
 
   // CALCULATIONS
