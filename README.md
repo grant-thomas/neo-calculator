@@ -7,7 +7,7 @@ Neo Calculator is used to determine __cement plug length__ needed for long-term 
 
 You can view a live demo of the calculator deployed on Vercel by clicking the link in the About section below:
 
-[Neo Calculator - Live Demo](https://www.neo-plug-calculator.vercel.app/)
+[Neo Calculator - Live Demo](https://neo-plug-calculator.vercel.app/)
 
 ## Features
 
